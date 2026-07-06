@@ -1,0 +1,21 @@
+baseURL = "https://codingcraftsman.blog/"
+defaultContentLanguage = "en"
+title = "CodingCraftsman"
+theme = "PaperMod"
+
+[params]
+  description = "Building LUMIS — technical case studies from a working system"
+  ShowReadingTime = true
+  ShowShareButtons = false
+  ShowPostNavLinks = true
+  ShowCodeCopyButtons = true
+
+[[menu.main]]
+  name = "Posts"
+  url = "/posts/"
+  weight = 10
+
+[[menu.main]]
+  name = "About"
+  url = "/about/"
+  weight = 20
