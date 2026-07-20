@@ -1,0 +1,40 @@
+/* "Indigo & Rust" theme — replaces PaperMod's default black-and-white palette.
+   Warm ledger-paper neutral, indigo links, rust accents on tags. */
+
+:root {
+    --theme: #F5EBD4;
+    --entry: #FCF4E3;
+    --primary: #24283A;
+    --secondary: #5E6072;
+    --tertiary: #E3D2A9;
+    --content: #2A2E42;
+    --code-block-bg: #241A10;
+    --code-bg: #EAD9B4;
+    --border: #E3D2A9;
+
+    --accent-ink: #2E3A8C;
+    --accent-rust: #A8471F;
+}
+
+:root[data-theme="dark"] {
+    --theme: #191D2C;
+    --entry: #222739;
+    --primary: #EFE6CE;
+    --secondary: #9CA3BC;
+    --tertiary: #2E3448;
+    --content: #E4DAC0;
+    --code-block-bg: #12141C;
+    --code-bg: #262B3D;
+    --border: #2E3448;
+
+    --accent-ink: #93A3E0;
+    --accent-rust: #E2895B;
+}
+
+a {
+    color: var(--accent-ink);
+}
+
+.post-tags a {
+    color: var(--accent-rust);
+}
