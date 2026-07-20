@@ -38,3 +38,11 @@ a {
 .post-tags a {
     color: var(--accent-rust);
 }
+
+/* PaperMod tints list-type pages (home, posts index, tags) with --code-bg
+   instead of --theme. Stock theme's two values were near-identical so this
+   never showed; ours diverge on purpose, so normalize list pages to --theme
+   to match single pages (About, posts) exactly. */
+.list {
+    background: var(--theme);
+}
