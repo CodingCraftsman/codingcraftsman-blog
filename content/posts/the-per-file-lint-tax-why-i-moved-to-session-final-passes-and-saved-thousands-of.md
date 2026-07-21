@@ -7,10 +7,8 @@ tags:
 - engineering
 description: "A specific, measurable inefficiency in real agentic coding sessions\
   \ \u2014 the triple-invocation lint cycle (check \u2192 auto-fix \u2192 re-check)\
-  \ run after every single"
+  \ run after every\u2026"
 ---
-
-# The Per-File Lint Tax: Why I Moved to Session-Final Passes and Saved Thousands of Tokens
 
 Here's the session log entry that started this investigation: Bash call count for a routine module-writing session, twelve files modified, came out at 47. It should have been closer to 20. The delta — 27 extra tool invocations — traced back entirely to linting.
 
