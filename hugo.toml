@@ -3,12 +3,19 @@ defaultContentLanguage = "en"
 title = "CodingCraftsman"
 theme = "PaperMod"
 
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
+
 [params]
   description = "Building LUMIS — technical case studies from a working system"
   ShowReadingTime = true
   ShowShareButtons = false
   ShowPostNavLinks = true
   ShowCodeCopyButtons = true
+  ShowToc = true
+  TocOpen = true
+  mainSections = ["posts"]
+  disableSpecial1stPost = true
 
 [[menu.main]]
   name = "Posts"
@@ -19,3 +26,22 @@ theme = "PaperMod"
   name = "About"
   url = "/about/"
   weight = 20
+
+[[menu.main]]
+  identifier = "search"
+  name = "Search"
+  url = "/search/"
+  weight = 30
+
+[related]
+  includeNewer = true
+  threshold = 20
+  toLower = true
+
+  [[related.indices]]
+    name = "tags"
+    weight = 100
+
+  [[related.indices]]
+    name = "date"
+    weight = 10

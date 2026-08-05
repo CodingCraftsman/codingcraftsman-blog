@@ -1,0 +1,14 @@
+{{- $related := .Site.RegularPages.Related . }}
+{{- with (first 3 $related) }}
+<div class="related-posts">
+  <div class="sidebar-heading">Related</div>
+  <ul>
+    {{- range . }}
+    <li>
+      <a href="{{ .Permalink }}">{{ .Title }}</a>
+      <span class="related-meta">{{ .ReadingTime }} min</span>
+    </li>
+    {{- end }}
+  </ul>
+</div>
+{{- end }}

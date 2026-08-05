@@ -1,48 +1,223 @@
-/* "Indigo & Rust" theme — replaces PaperMod's default black-and-white palette.
-   Warm ledger-paper neutral, indigo links, rust accents on tags. */
+/* "Lumen Bronze" theme — earthy warm palette with a bronze site-header band
+   and a gold accent, tying the "illumination" concept (LUMIS) to the site's
+   look. Fonts: Space Grotesk (headings), Source Sans 3 (body), JetBrains Mono
+   (code/meta), Work Sans (tag pills) — loaded in extend_head.html. */
 
 :root {
-    --theme: #F5EBD4;
-    --entry: #FCF4E3;
-    --primary: #24283A;
-    --secondary: #5E6072;
-    --tertiary: #E3D2A9;
-    --content: #2A2E42;
-    --code-block-bg: #241A10;
-    --code-bg: #EAD9B4;
-    --border: #E3D2A9;
+    --theme: oklch(96% 0.015 75);
+    --entry: oklch(96% 0.015 75);
+    --primary: oklch(25% 0.02 55);
+    --secondary: oklch(48% 0.02 55);
+    --tertiary: oklch(80% 0.02 70);
+    --content: oklch(25% 0.02 55);
+    --code-bg: oklch(99% 0.006 75);
+    --code-block-bg: oklch(93% 0.012 70);
+    --border: oklch(87% 0.02 70);
+    --main-width: 860px;
 
-    --accent-ink: #2E3A8C;
-    --accent-rust: #A8471F;
+    --accent: oklch(66% 0.15 85);
+    --hero-bg: oklch(30% 0.05 62);
+    --hero-text: oklch(94% 0.02 78);
+    --hero-sub: oklch(78% 0.03 78);
+
+    --tag1-bg: oklch(90% 0.06 40);   --tag1-tx: oklch(35% 0.12 40);
+    --tag2-bg: oklch(90% 0.06 300);  --tag2-tx: oklch(35% 0.12 300);
+    --tag3-bg: oklch(90% 0.06 200);  --tag3-tx: oklch(35% 0.12 200);
+    --tag4-bg: oklch(90% 0.06 160);  --tag4-tx: oklch(35% 0.12 160);
+    --tag5-bg: oklch(90% 0.06 15);   --tag5-tx: oklch(35% 0.12 15);
+    --tag6-bg: oklch(90% 0.06 130);  --tag6-tx: oklch(35% 0.12 130);
 }
 
 :root[data-theme="dark"] {
-    --theme: #191D2C;
-    --entry: #222739;
-    --primary: #EFE6CE;
-    --secondary: #9CA3BC;
-    --tertiary: #2E3448;
-    --content: #E4DAC0;
-    --code-block-bg: #12141C;
-    --code-bg: #262B3D;
-    --border: #2E3448;
+    --theme: oklch(20% 0.012 50);
+    --entry: oklch(20% 0.012 50);
+    --primary: oklch(93% 0.01 65);
+    --secondary: oklch(66% 0.02 60);
+    --tertiary: oklch(38% 0.02 55);
+    --content: oklch(93% 0.01 65);
+    --code-bg: oklch(24% 0.014 50);
+    --code-block-bg: oklch(16% 0.01 50);
+    --border: oklch(33% 0.02 50);
 
-    --accent-ink: #93A3E0;
-    --accent-rust: #E2895B;
+    --accent: oklch(78% 0.15 88);
+    --hero-bg: oklch(86% 0.04 72);
+    --hero-text: oklch(26% 0.05 62);
+    --hero-sub: oklch(40% 0.05 62);
+
+    --tag1-bg: oklch(30% 0.09 40);   --tag1-tx: oklch(85% 0.13 40);
+    --tag2-bg: oklch(30% 0.09 300);  --tag2-tx: oklch(85% 0.13 300);
+    --tag3-bg: oklch(30% 0.09 200);  --tag3-tx: oklch(85% 0.13 200);
+    --tag4-bg: oklch(30% 0.09 160);  --tag4-tx: oklch(85% 0.13 160);
+    --tag5-bg: oklch(30% 0.09 15);   --tag5-tx: oklch(85% 0.13 15);
+    --tag6-bg: oklch(30% 0.09 130);  --tag6-tx: oklch(85% 0.13 130);
 }
 
-a {
-    color: var(--accent-ink);
-}
-
-.post-tags a {
-    color: var(--accent-rust);
-}
-
-/* PaperMod tints list-type pages (home, posts index, tags) with --code-bg
-   instead of --theme. Stock theme's two values were near-identical so this
-   never showed; ours diverge on purpose, so normalize list pages to --theme
-   to match single pages (About, posts) exactly. */
+/* PaperMod tints list-type pages with --code-bg by default; keep them flush
+   with single pages now that entries have no card background of their own. */
 .list {
     background: var(--theme);
 }
+
+body, .menu a, .post-meta, .post-content, .entry-content {
+    font-family: 'Source Sans 3', system-ui, sans-serif;
+}
+
+.logo a, .entry-header h2, .post-title, .first-entry .entry-header h1,
+.sidebar-heading, h1, h2, h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+}
+
+.post-meta, .entry-footer, details.toc summary .title, .related-meta {
+    font-family: 'JetBrains Mono', monospace;
+}
+
+a { color: var(--accent); text-decoration: none; }
+a:hover { opacity: .82; }
+
+/* --- Header: bronze band, inverts with the theme --- */
+.header {
+    background: var(--hero-bg);
+}
+.logo a {
+    color: var(--hero-text);
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: .4px;
+}
+.header-nav .menu a span {
+    color: var(--hero-sub);
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .4px;
+}
+.header-nav .menu a span.active {
+    color: var(--hero-text);
+    text-decoration-color: var(--accent);
+}
+.theme-toggle svg { color: var(--hero-text); }
+.nav-sep, .lang-menu a { color: var(--hero-sub); }
+
+/* --- Post entries: plain list with a top accent bar instead of cards --- */
+.post-entry, .first-entry {
+    position: relative;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    border-radius: 0;
+    padding: 24px 0;
+    margin-bottom: 0;
+    border-bottom: 1px solid var(--border);
+    transition: none;
+}
+.post-entry::before, .first-entry::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 2px;
+    background: var(--accent);
+    box-shadow: 0 0 6px var(--accent);
+    border-radius: 2px;
+}
+.post-entry:hover, .post-entry:focus-within { transform: none; }
+
+/* --- Tag pills: rounded, cycling through 6 hues for at-a-glance variety --- */
+.post-tags { gap: 8px; margin-top: 10px; }
+.post-tags a {
+    font-family: 'Work Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 1.8;
+    padding: 3px 12px;
+    border: none;
+    border-radius: 20px;
+    background: var(--code-bg);
+    color: var(--secondary);
+}
+.post-tags li:nth-of-type(6n+1) a { background: var(--tag1-bg); color: var(--tag1-tx); }
+.post-tags li:nth-of-type(6n+2) a { background: var(--tag2-bg); color: var(--tag2-tx); }
+.post-tags li:nth-of-type(6n+3) a { background: var(--tag3-bg); color: var(--tag3-tx); }
+.post-tags li:nth-of-type(6n+4) a { background: var(--tag4-bg); color: var(--tag4-tx); }
+.post-tags li:nth-of-type(6n+5) a { background: var(--tag5-bg); color: var(--tag5-tx); }
+.post-tags li:nth-of-type(6n+0) a { background: var(--tag6-bg); color: var(--tag6-tx); }
+.post-tags a:hover { opacity: .82; }
+
+/* --- Table of contents --- */
+details.toc {
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+}
+.toc a { color: var(--secondary); }
+.toc a:hover { color: var(--accent); }
+
+/* --- Post page: two-column body with a sticky sidebar (ToC + related) --- */
+.post-body {
+    display: flex;
+    gap: 32px;
+    align-items: flex-start;
+}
+.post-main { flex: 1; min-width: 0; }
+.post-sidebar {
+    width: 220px;
+    flex: none;
+    position: sticky;
+    top: calc(var(--header-height) + 24px);
+}
+.post-sidebar details.toc { margin-bottom: 24px; }
+@media (max-width: 900px) {
+    .post-body { flex-direction: column; }
+    .post-sidebar { width: 100%; position: static; }
+}
+
+/* --- Related posts (in post-sidebar) --- */
+.related-posts { margin-top: 4px; }
+.sidebar-heading {
+    font-size: 10.5px;
+    letter-spacing: .6px;
+    color: var(--secondary);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+}
+.related-posts ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
+.related-posts a { font-size: 12.5px; line-height: 1.4; }
+.related-meta { display: block; font-size: 10.5px; color: var(--secondary); margin-top: 2px; }
+
+/* --- Code blocks: theme-toned recessed panel instead of a stark black box --- */
+.post-content pre, .post-content code { background: var(--code-block-bg) !important; }
+
+/* --- Homepage: tag-browse bar, two-column body with a Highlights sidebar --- */
+.tag-browse { display: flex; flex-wrap: wrap; gap: 8px; margin: 4px 0 24px; }
+.tag-browse a {
+    font-family: 'Work Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    padding: 3px 12px;
+    border-radius: 20px;
+    background: var(--code-bg);
+    color: var(--secondary);
+}
+.tag-browse .tag-browse-all { background: var(--accent); color: var(--hero-bg); }
+
+.home-body { display: flex; gap: 32px; align-items: flex-start; }
+.home-main { flex: 1; min-width: 0; }
+.home-sidebar { width: 200px; flex: none; }
+@media (max-width: 900px) {
+    .home-body { flex-direction: column; }
+    .home-sidebar { width: 100%; }
+}
+.highlight-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 11px; }
+.highlight-list a { font-size: 12.5px; line-height: 1.4; }
+
+/* --- Numbered pagination (homepage) --- */
+.pagination.numbered { gap: 8px; flex-wrap: wrap; }
+.pagination.numbered a {
+    background: var(--code-bg);
+    color: var(--secondary);
+    font-family: 'Source Sans 3', sans-serif;
+}
+.pagination.numbered .page-num.active { background: var(--accent); color: var(--hero-bg); font-weight: 700; }
+
+/* --- Search page (native PaperMod Fuse.js search, restyled) --- */
+.searchbox input { background: var(--code-bg); border: 1px solid var(--border); color: var(--primary); }
+.searchResults li { background: var(--entry); }

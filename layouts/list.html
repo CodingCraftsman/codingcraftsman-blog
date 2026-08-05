@@ -1,0 +1,129 @@
+{{- define "main" }}
+
+{{- if (and site.Params.profileMode.enabled .IsHome) }}
+{{- partial "index_profile.html" . }}
+{{- else }} {{/* if not profileMode */}}
+
+{{- if not .IsHome | and .Title }}
+<header class="page-header">
+  {{- partial "breadcrumbs.html" . }}
+  <h1>
+    {{ .Title }}
+    {{- if and (or (eq .Kind `term`) (eq .Kind `section`)) (.Param "ShowRssButtonInSectionTermList") }}
+    {{- with .OutputFormats.Get "rss" }}
+    <a href="{{ .RelPermalink }}" title="RSS" aria-label="RSS">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" height="23">
+        <path d="M4 11a9 9 0 0 1 9 9" />
+        <path d="M4 4a16 16 0 0 1 16 16" />
+        <circle cx="5" cy="19" r="1" />
+      </svg>
+    </a>
+    {{- end }}
+    {{- end }}
+  </h1>
+  {{- if .Description }}
+  <div class="post-description">
+    {{ .Description | markdownify }}
+  </div>
+  {{- end }}
+</header>
+{{- end }}
+
+{{- if .Content }}
+<div class="post-content md-content">
+  {{- if not (.Param "disableAnchoredHeadings") }}
+  {{- partial "anchored_headings.html" .Content -}}
+  {{- else }}{{ .Content }}{{ end }}
+</div>
+{{- end }}
+
+{{- if .IsHome }}
+{{- with site.Taxonomies.tags }}
+<nav class="tag-browse">
+  <a class="tag-browse-all" href="{{ "/tags/" | absLangURL }}">All</a>
+  {{- range (.ByCount | first 8) }}
+  <a href="{{ .Page.Permalink }}">{{ .Page.LinkTitle }}</a>
+  {{- end }}
+</nav>
+{{- end }}
+{{- end }}
+
+{{- $pages := union .RegularPages .Sections }}
+
+{{- if .IsHome }}
+{{- $pages = where site.RegularPages "Type" "in" site.Params.mainSections }}
+{{- $pages = where $pages "Params.hiddenInHomeList" "!=" "true"  }}
+{{- end }}
+
+{{- $paginator := .Paginate $pages }}
+
+{{- if and .IsHome site.Params.homeInfoParams (eq $paginator.PageNumber 1) }}
+{{- partial "home_info.html" . }}
+{{- end }}
+
+{{- $term := .Data.Term }}
+
+{{- if .IsHome }}
+<div class="home-body">
+  <div class="home-main">
+    {{- range $index, $page := $paginator.Pages }}
+    {{- $class := "post-entry" }}
+    {{- partial "entry_card.html" (dict "page" $page "class" $class) }}
+    {{- end }}
+
+    {{- if gt $paginator.TotalPages 1 }}
+    <nav class="pagination numbered">
+      {{- if $paginator.HasPrev }}
+      <a class="prev" href="{{ $paginator.Prev.URL | absURL }}">&laquo;&nbsp;Newer</a>
+      {{- end }}
+      {{- range $paginator.Pagers }}
+      <a href="{{ .URL | absURL }}" class="page-num{{ if eq .PageNumber $paginator.PageNumber }} active{{ end }}">{{ .PageNumber }}</a>
+      {{- end }}
+      {{- if $paginator.HasNext }}
+      <a class="next" href="{{ $paginator.Next.URL | absURL }}">Older&nbsp;&raquo;</a>
+      {{- end }}
+    </nav>
+    {{- end }}
+  </div>
+
+  <aside class="home-sidebar">
+    {{- $highlights := where site.RegularPages "Params.highlight" true }}
+    {{- if lt (len $highlights) 1 }}{{- $highlights = first 3 site.RegularPages }}{{- end }}
+    <div class="sidebar-heading">Highlights</div>
+    <ul class="highlight-list">
+      {{- range first 3 $highlights }}
+      <li><a href="{{ .Permalink }}">{{ .Title }}</a></li>
+      {{- end }}
+    </ul>
+  </aside>
+</div>
+{{- else }}
+
+{{- range $index, $page := $paginator.Pages }}
+{{- $class := "post-entry" }}
+{{- if $term }}{{- $class = "post-entry tag-entry" }}{{- end }}
+{{- partial "entry_card.html" (dict "page" $page "class" $class) }}
+{{- end }}
+
+{{- if gt $paginator.TotalPages 1 }}
+<footer class="page-footer">
+  <nav class="pagination">
+    {{- if $paginator.HasPrev }}
+    <a class="prev" href="{{ $paginator.Prev.URL | absURL }}">
+      «&nbsp;{{ i18n "prev_page" }}&nbsp;
+    </a>
+    {{- end }}
+    {{- if $paginator.HasNext }}
+    <a class="next" href="{{ $paginator.Next.URL | absURL }}">
+      {{- i18n "next_page" }}&nbsp;»
+    </a>
+    {{- end }}
+  </nav>
+</footer>
+{{- end }}
+{{- end }}
+
+{{- end }}{{/* end profileMode */}}
+
+{{- end }}{{- /* end main */ -}}
