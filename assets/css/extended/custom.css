@@ -138,7 +138,9 @@ a:hover { opacity: .82; }
 }
 .home-hero .post-content { max-width: var(--main-width); margin: 0 auto; }
 .home-hero .post-content,
-.home-hero .post-content p { color: var(--hero-text); }
+.home-hero .post-content p { color: var(--hero-text); font-size: 14px; line-height: 1.55; }
+.home-hero .post-content h1 { font-size: 20px; }
+.home-hero .post-content h2 { font-size: 17px; }
 .home-hero .post-content em { color: var(--hero-sub); }
 
 /* --- Search + tag-browse in one row --- */
@@ -160,18 +162,21 @@ a:hover { opacity: .82; }
     margin: 0;
 }
 
-/* --- Full-bleed gold section rule between search row and posts --- */
+/* --- Full-bleed muted section rule between search row and posts --- */
 .section-rule {
     border: none;
     position: relative;
     left: 50%;
     width: 100vw;
     margin-left: -50vw;
-    height: 2px;
-    background: var(--accent);
+    height: 1px;
+    background: var(--border);
     margin-top: 20px;
     margin-bottom: 0;
 }
+
+/* --- Post entry title: reduced from PaperMod's 24px default --- */
+.entry-header h2 { font-size: 18px; line-height: 1.3; }
 
 /* --- Post entries: plain list with a top accent bar --- */
 .post-entry, .first-entry {
@@ -269,7 +274,7 @@ details.toc { background: var(--code-bg); border: 1px solid var(--border); borde
 .post-content pre, .post-content code { background: var(--code-block-bg) !important; }
 
 /* --- Homepage two-column body: vertical border divider --- */
-.home-body { display: flex; gap: 0; align-items: flex-start; }
+.home-body { display: flex; gap: 0; align-items: flex-start; padding-top: 24px; }
 .home-main { flex: 1; min-width: 0; padding-right: 32px; border-right: 1px solid var(--border); }
 .home-sidebar { width: 200px; flex: none; padding-left: 28px; }
 
