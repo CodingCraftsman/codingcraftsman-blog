@@ -41,15 +41,18 @@
 {{- end }}
 
 {{- if .IsHome }}
-{{- partial "home_search.html" . }}
-{{- with site.Taxonomies.tags }}
-<nav class="tag-browse">
-  <a class="tag-browse-all" href="{{ "/tags/" | absLangURL }}">All</a>
-  {{- range (.ByCount | first 8) }}
-  <a href="{{ .Page.Permalink }}">{{ .Page.LinkTitle }}</a>
+<div class="search-tags-row">
+  {{- partial "home_search.html" . }}
+  {{- with site.Taxonomies.tags }}
+  <nav class="tag-browse">
+    <a class="tag-browse-all" href="{{ "/tags/" | absLangURL }}">All</a>
+    {{- range (.ByCount | first 8) }}
+    <a href="{{ .Page.Permalink }}">{{ .Page.LinkTitle }}</a>
+    {{- end }}
+  </nav>
   {{- end }}
-</nav>
-{{- end }}
+</div>
+<hr class="section-rule">
 {{- end }}
 
 {{- $pages := union .RegularPages .Sections }}
@@ -98,6 +101,11 @@
       {{- range first 3 $highlights }}
       <li><a href="{{ .Permalink }}">{{ .Title }}</a></li>
       {{- end }}
+    </ul>
+    <div class="sidebar-heading sidebar-section-heading">Subscribe</div>
+    <ul class="subscribe-list">
+      <li><a href="/index.xml">RSS feed</a></li>
+      <li><a href="#">Email updates</a></li>
     </ul>
   </aside>
 </div>

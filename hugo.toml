@@ -2,6 +2,7 @@ baseURL = "https://codingcraftsman.blog/"
 defaultContentLanguage = "en"
 title = "CodingCraftsman"
 theme = "PaperMod"
+paginate = 5
 
 [outputs]
   home = ["HTML", "RSS", "JSON"]
@@ -26,12 +27,6 @@ theme = "PaperMod"
   name = "About"
   url = "/about/"
   weight = 20
-
-[[menu.main]]
-  identifier = "search"
-  name = "Search"
-  url = "/search/"
-  weight = 30
 
 [related]
   includeNewer = true
