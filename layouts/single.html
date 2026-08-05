@@ -2,7 +2,7 @@
 
 <article class="post-single">
   <header class="post-header">
-    {{ partial "breadcrumbs.html" . }}
+    <a class="back-link" href="{{ "/posts/" | absURL }}">← All posts</a>
     <h1 class="post-title entry-hint-parent">
       {{ .Title }}
       {{- if .Draft }}
@@ -20,14 +20,26 @@
     </div>
     {{- end }}
     {{- if not (.Param "hideMeta") }}
-    <div class="post-meta">
-      {{- partial "post_meta.html" . -}}
-      {{- partial "translation_list.html" . -}}
-      {{- partial "edit_post.html" . -}}
-      {{- partial "post_canonical.html" . -}}
+    <div class="post-header-meta">
+      <div class="post-meta">
+        {{- partial "post_meta.html" . -}}
+        {{- partial "translation_list.html" . -}}
+        {{- partial "edit_post.html" . -}}
+        {{- partial "post_canonical.html" . -}}
+      </div>
+      {{- $tags := .Language.Params.Taxonomies.tag | default "tags" }}
+      {{- with ($.GetTerms $tags) }}
+      <ul class="post-tags post-header-tags">
+        {{- range . }}
+        <li><a href="{{ .Permalink }}">{{ .LinkTitle }}</a></li>
+        {{- end }}
+      </ul>
+      {{- end }}
     </div>
     {{- end }}
   </header>
+
+  <hr class="post-rule">
 
   <div class="post-body">
     <div class="post-main">
@@ -44,20 +56,9 @@
 
       {{- partial "extend_post_content.html" . }}
 
-      <footer class="post-footer">
-        {{- $tags := .Language.Params.Taxonomies.tag | default "tags" }}
-        <ul class="post-tags">
-          {{- range ($.GetTerms $tags) }}
-          <li><a href="{{ .Permalink }}">{{ .LinkTitle }}</a></li>
-          {{- end }}
-        </ul>
-        {{- if (.Param "ShowPostNavLinks") }}
-        {{- partial "post_nav_links.html" . }}
-        {{- end }}
-        {{- if (and site.Params.ShowShareButtons (ne .Params.disableShare true)) }}
-        {{- partial "share_icons.html" . -}}
-        {{- end }}
-      </footer>
+      {{- if (and site.Params.ShowShareButtons (ne .Params.disableShare true)) }}
+      {{- partial "share_icons.html" . -}}
+      {{- end }}
 
       {{- if (.Param "comments") }}
       {{- partial "comments.html" . }}
@@ -71,6 +72,13 @@
       {{- partial "related_posts.html" . }}
     </aside>
   </div>
+
+  <hr class="post-rule">
+
+  {{- if (.Param "ShowPostNavLinks") }}
+  {{- partial "post_nav_links.html" . }}
+  {{- end }}
+
 </article>
 
 {{- end }}{{/* end main */}}
