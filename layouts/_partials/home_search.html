@@ -1,0 +1,37 @@
+<div class="home-search">
+  <input id="homeSearchInput" type="search" placeholder="Search posts…" autocomplete="off" aria-label="Search posts">
+  <ul id="homeSearchResults" class="home-search-results"></ul>
+</div>
+<script>
+(function () {
+  var input = document.getElementById('homeSearchInput');
+  var list = document.getElementById('homeSearchResults');
+  if (!input || !list) return;
+  var data = null;
+  function load() {
+    if (data) return Promise.resolve(data);
+    return fetch('/index.json').then(function (r) { return r.json(); }).then(function (d) { data = d; return d; });
+  }
+  function render(items) {
+    list.innerHTML = '';
+    items.slice(0, 6).forEach(function (item) {
+      var li = document.createElement('li');
+      var a = document.createElement('a');
+      a.href = item.permalink;
+      a.textContent = item.title;
+      li.appendChild(a);
+      list.appendChild(li);
+    });
+  }
+  input.addEventListener('input', function () {
+    var q = input.value.trim().toLowerCase();
+    if (!q) { list.innerHTML = ''; return; }
+    load().then(function (items) {
+      var matches = items.filter(function (item) {
+        return ((item.title || '') + ' ' + (item.summary || '')).toLowerCase().indexOf(q) !== -1;
+      });
+      render(matches);
+    });
+  });
+})();
+</script>

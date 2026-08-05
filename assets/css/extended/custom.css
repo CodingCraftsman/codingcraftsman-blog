@@ -221,3 +221,63 @@ details.toc {
 /* --- Search page (native PaperMod Fuse.js search, restyled) --- */
 .searchbox input { background: var(--code-bg); border: 1px solid var(--border); color: var(--primary); }
 .searchResults li { background: var(--entry); }
+
+/* --- Homepage hero band: bronze background wraps the intro text, full-bleed --- */
+.home-hero {
+    background: var(--hero-bg);
+    position: relative;
+    left: 50%;
+    right: 50%;
+    width: 100vw;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    padding: 34px var(--gap) 30px;
+    margin-bottom: 28px;
+}
+.home-hero .post-content { max-width: var(--main-width); margin: 0 auto; }
+.home-hero .post-content, .home-hero .post-content p { color: var(--hero-text); }
+.home-hero .post-content em { color: var(--hero-sub); }
+
+/* --- Homepage live search box (vanilla JS, no build step) --- */
+.home-search { position: relative; margin: 0 0 22px; max-width: 280px; }
+.home-search input {
+    width: 100%;
+    box-sizing: border-box;
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 12.5px;
+    padding: 7px 14px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    background: var(--code-bg);
+    color: var(--primary);
+}
+.home-search-results {
+    list-style: none;
+    margin: 6px 0 0;
+    padding: 0;
+    position: absolute;
+    left: 0; right: 0; z-index: 5;
+    background: var(--entry);
+    border-radius: 10px;
+    overflow: hidden;
+}
+.home-search-results:empty { display: none; }
+.home-search-results li { border-bottom: 1px solid var(--border); }
+.home-search-results li:last-child { border-bottom: none; }
+.home-search-results a { display: block; padding: 8px 14px; font-size: 12.5px; color: var(--primary); }
+.home-search-results a:hover { background: var(--code-bg); }
+
+/* --- About/post pull-quotes (markdown blockquotes) --- */
+.post-content blockquote {
+    border-left: 3px solid var(--accent);
+    margin: 20px 0;
+    padding: 2px 0 2px 18px;
+}
+.post-content blockquote p:first-child {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: 17px;
+    color: var(--accent);
+    margin-bottom: 6px;
+}
+.post-content blockquote p { color: var(--secondary); font-size: 14px; line-height: 1.6; }

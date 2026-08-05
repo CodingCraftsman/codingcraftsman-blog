@@ -31,14 +31,17 @@
 {{- end }}
 
 {{- if .Content }}
+{{- if .IsHome }}<div class="home-hero">{{- end }}
 <div class="post-content md-content">
   {{- if not (.Param "disableAnchoredHeadings") }}
   {{- partial "anchored_headings.html" .Content -}}
   {{- else }}{{ .Content }}{{ end }}
 </div>
+{{- if .IsHome }}</div>{{- end }}
 {{- end }}
 
 {{- if .IsHome }}
+{{- partial "home_search.html" . }}
 {{- with site.Taxonomies.tags }}
 <nav class="tag-browse">
   <a class="tag-browse-all" href="{{ "/tags/" | absLangURL }}">All</a>
