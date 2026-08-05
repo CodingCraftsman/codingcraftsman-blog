@@ -2,7 +2,8 @@ baseURL = "https://codingcraftsman.blog/"
 defaultContentLanguage = "en"
 title = "CodingCraftsman"
 theme = "PaperMod"
-paginate = 5
+[pagination]
+  pagerSize = 5
 
 [outputs]
   home = ["HTML", "RSS", "JSON"]
