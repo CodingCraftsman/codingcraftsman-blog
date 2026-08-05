@@ -28,6 +28,10 @@ paginate = 5
   url = "/about/"
   weight = 20
 
+[markup]
+  [markup.highlight]
+    noClasses = false
+
 [related]
   includeNewer = true
   threshold = 20

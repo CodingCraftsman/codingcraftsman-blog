@@ -11,7 +11,7 @@
     --tertiary: oklch(80% 0.02 70);
     --content: oklch(25% 0.02 55);
     --code-bg: oklch(99% 0.006 75);
-    --code-block-bg: oklch(93% 0.012 70);
+    --code-block-bg: #24273a;
     --border: oklch(87% 0.02 70);
     --main-width: 860px;
 
@@ -36,7 +36,7 @@
     --tertiary: oklch(38% 0.02 55);
     --content: oklch(93% 0.01 65);
     --code-bg: oklch(24% 0.014 50);
-    --code-block-bg: oklch(16% 0.01 50);
+    --code-block-bg: #1e2030;
     --border: oklch(33% 0.02 50);
 
     --accent: oklch(78% 0.15 88);
@@ -343,7 +343,15 @@ div.toc ul ul { padding-left: 12px; }
 .related-meta { display: block; font-size: 10.5px; color: var(--secondary); margin-top: 2px; }
 
 /* --- Code blocks --- */
-.post-content pre, .post-content code { background: var(--code-block-bg) !important; }
+/* Fenced blocks: always dark terminal style (Catppuccin Macchiato) */
+.post-content pre { background: var(--code-block-bg) !important; border-radius: 8px; }
+/* Inline code: theme-aware light/dark background */
+.post-content :not(pre) > code {
+    background: var(--code-bg) !important;
+    color: var(--primary);
+    border-radius: 4px;
+    padding: 0.1em 0.4em;
+}
 
 /* --- Homepage two-column body: vertical border divider --- */
 .home-body { display: flex; gap: 0; align-items: flex-start; padding-top: 24px; }
