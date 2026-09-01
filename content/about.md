@@ -19,3 +19,17 @@ I'm also someone who can't leave well enough alone. I like to pull things apart,
 AI is moving fast. Faster than most of us expected. I decided I'd rather be someone building with it than someone watching from the sidelines wondering what they missed. This blog is my way of building in public — sharing what works, what doesn't, and what I'm still figuring out.
 
 If you're somewhere on that same journey, you're in the right place.
+
+## How LUMIS Is Built
+
+A lot of what I write here mentions the tools I used to build LUMIS. If some of those names don't mean anything to you, that's fine — here's the short, plain-language version of what's under the hood.
+
+- **Python** does most of the heavy lifting. It's the language behind the "brain" that thinks and makes decisions, the background jobs that run on a schedule, the connections to my email and calendar, and the engine behind the web dashboard I use to keep an eye on everything.
+- **SvelteKit** is what the dashboard *looks* like — the buttons, pages, and screens I actually click on. It's a modern toolkit for building web pages that feel fast and responsive.
+- **SQLite** is a tiny, self-contained database that keeps track of the system's state — what's been done, what's pending, what to remember. And LUMIS's actual memory lives in plain text files (Markdown) that I can open and read in any editor, including a note-taking app called Obsidian. Nothing is locked away in some cloud service I can't reach.
+- **Claude** is the AI at the center of it all. LUMIS talks to Claude — Anthropic's AI model — through a couple of official toolkits (the Claude Agent SDK, plus lifecycle "hooks" in Claude Code and OpenCode) that let the AI read notes, draft replies, and take actions in a controlled way. A small AI model running on my own machine handles the simpler, high-volume jobs to keep costs down, and Claude handles the real thinking.
+- **A handful of shell and Python scripts** fill in the gaps around the AI — small bits of automation that glue the pieces together and handle the plumbing.
+
+And this blog itself? It runs on **Hugo**, a tool that turns plain text files into a finished website, styled with a theme called **PaperMod**. Every time I publish, **GitHub Actions** (an automation service) rebuilds the site and posts it to **GitHub Pages** (free web hosting) — so writing a post is really just saving a text file and letting the robots do the rest.
+
+None of this is magic. It's a stack of ordinary, mostly free tools, wired together with a lot of curiosity. If you're building something of your own, I hope seeing the seams makes it feel a little more within reach.
