@@ -10,6 +10,10 @@ theme = "PaperMod"
 
 [params]
   description = "Building LUMIS — technical case studies from a working system"
+  # GoatCounter cookieless analytics (task #320). Set this to your GoatCounter
+  # subdomain code ONLY — e.g. code = "guillermofaro" for guillermofaro.goatcounter.com.
+  # Leave empty to disable analytics entirely (no script is emitted).
+  goatcounterCode = "guillermofaro"
   ShowReadingTime = true
   ShowShareButtons = false
   ShowPostNavLinks = true

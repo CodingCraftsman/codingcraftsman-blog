@@ -2,4 +2,13 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Source+Sans+3:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+{{- /* Privacy-first, cookieless page analytics via GoatCounter (task #320).
+       Gated on params.goatcounterCode: a no-op (nothing emitted) when the
+       value is empty/unset, so local builds and the pre-token state stay clean.
+       The count.js beacon is cookieless, sets no PII, and honors Do-Not-Track. */ -}}
+{{- with site.Params.goatcounterCode -}}
+<script data-goatcounter="https://{{ . }}.goatcounter.com/count"
+        async src="https://gc.zgo.at/count.js"></script>
+{{- end -}}
 {{- /* Head custom content area end */ -}}
